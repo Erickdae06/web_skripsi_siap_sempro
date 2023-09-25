@@ -1,0 +1,19 @@
+/* body {
+    background-image: url("/admin/assets/img/wallpaper.jpg");
+    background-position: center;
+    background-size: cover;
+} */
+
+.form-check-input:checked {
+    background-color: #28a745; /* Warna hijau "success" dari Bootstrap */
+    border-color: #28a745; /* Warna border yang sesuai */
+}
+/* Ganti warna ikon ceklis (checkmark) saat dicentang */
+.form-check-input:checked::before {
+    background-color: #fff; /* Warna ikon ceklis */
+}
+
+.form-control:focus {
+    border-color: #28a745; /* Warna hijau "success" dari Bootstrap */
+    box-shadow: 0 0 0 0.25rem rgb(40, 167, 70);
+}
