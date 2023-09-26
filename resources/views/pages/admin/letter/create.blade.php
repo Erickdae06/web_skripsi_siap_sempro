@@ -66,17 +66,7 @@
                                     @enderror
                                 </div>
 
-                                <div class="mb-3 row">
-                                    <label for="letter_no" class="col-sm-3 col-form-label">Kode Klasifikasi</label>
-                                    <div class="col-sm-9">
-                                        <input type="number" class="form-control @error('letter_no') is-invalid @enderror" value="{{ old('letter_no') }}" name="klasifikasi_nogit " placeholder="Kode Klasifikasi.." oninput="this.value = this.value.slice(0, 3);"  required>
-                                    </div>
-                                    @error('letter_no')
-                                        <div class="invalid-feedback">
-                                            {{ $message; }}
-                                        </div>
-                                    @enderror
-                                </div>
+                                
                                 
 
                                 <div class="mb-3 row">

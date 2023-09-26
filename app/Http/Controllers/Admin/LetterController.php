@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Klasifikasi;
 use Illuminate\Http\Request;
 
 use App\Models\Department;
@@ -25,12 +24,10 @@ class LetterController extends Controller
     {
         $departments = Department::all();
         $senders = Sender::all();
-        $klasifikasi = Klasifikasi::all();
 
         return view('pages.admin.letter.create', [
             'departments' => $departments,
             'senders' => $senders,
-            'klasifikasis' => $klasifikasi
         ]);
     }
 
@@ -45,11 +42,6 @@ class LetterController extends Controller
             'sender_id' => 'required',
             'letter_file' => 'required|mimes:pdf|file',
             'letter_type' => 'required',
-            'letter_klasifikasi' => [
-                'required',
-                'numeric',
-                'digits_between:1,3',
-            ],
         ]);
 
         if ($request->file('letter_file')) {
@@ -152,13 +144,11 @@ class LetterController extends Controller
 
         $departments = Department::all();
         $senders = Sender::all();
-        $klasifikasi = Klasifikasi::all();
 
         return view('pages.admin.letter.edit', [
             'departments' => $departments,
             'senders' => $senders,
             'item' => $item,
-            'klasifikasis' => $klasifikasi
         ]);
     }
 
@@ -180,11 +170,6 @@ class LetterController extends Controller
             'sender_id' => 'required',
             'letter_file' => 'mimes:pdf|file',
             'letter_type' => 'required',
-            'letter_klasifikasi' => [
-                'required',
-                'numeric',
-                'digits_between:1,3',
-            ],
         ]);
 
         $item = Letter::findOrFail($id);

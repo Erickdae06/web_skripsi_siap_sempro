@@ -6,7 +6,7 @@
 
 @section('container')
     <main>
-        <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
+        <header class="page-header page-header-compact page-header-dark border-bottom bg-dark border-success mb-4">
             <div class="container-xl px-4">
                 <div class="page-header-content">
                     <div class="row align-items-center justify-content-between pt-3">
@@ -45,9 +45,9 @@
             <div class="row">
                 <div class="col-lg-8">
                     <!-- Change password card-->
-                    <div class="card mb-4">
-                        <div class="card-header">Ubah Password</div>
-                        <div class="card-body">
+                    <div class="card mb-4 border-3 border-success">
+                        <div class="card-header bg-dark border-bottom border-success bg-gradient text-success">Ubah Password</div>
+                        <div class="card-body bg-dark text-light">
                             @if (session()->has('success'))
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                                     {{ session('success') }}
@@ -86,7 +86,7 @@
                                         </div>
                                     @enderror
                                 </div>
-                                <button class="btn btn-primary" type="submit">Perbarui Password</button>
+                                <button class="btn btn-outline-success" type="submit">Perbarui Password</button>
                             </form>
                         </div>
                     </div>

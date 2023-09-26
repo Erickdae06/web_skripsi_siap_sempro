@@ -6,7 +6,7 @@
 
 @section('container')
     <main>
-        <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
+        <header class="page-header page-header-compact page-header-dark border-bottom bg-dark border-success mb-4">
             <div class="container-xl px-4">
                 <div class="page-header-content">
                     <div class="row align-items-center justify-content-between pt-3">
@@ -45,9 +45,9 @@
             <div class="row">
                 <div class="col-xl-4">
                     <!-- Profile picture card-->
-                    <div class="card mb-4 mb-xl-0">
-                        <div class="card-header">Profile Picture</div>
-                        <div class="card-body text-center">
+                    <div class="card mb-4 mb-xl-0 border-3 border-success">
+                        <div class="card-header border-2 border-success border-bottom bg-dark bg-gradient text-success">Profile Picture</div>
+                        <div class="card-body text-center bg-dark text-light">
                             <!-- Profile picture image-->
                             @if ($user->profile != NULL)
                                 <img class="img-account-profile rounded-circle mb-2" src="{{ Storage::url($user->profile) }}" alt="" />
@@ -67,16 +67,16 @@
                                   style="display: none;"
                                   onchange="form.submit()"
                                 />    
-                                <button class="btn btn-primary" type="button" onclick="thisFileUpload();">Unggah Photo</button>
+                                <button class="btn btn-outline-success" type="button" onclick="thisFileUpload();">Unggah Photo</button>
                             </form>
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-8">
                     <!-- Account details card-->
-                    <div class="card mb-4">
-                        <div class="card-header">Informasi Akun</div>
-                        <div class="card-body">
+                    <div class="card mb-4 border-3 border-success">
+                        <div class="card-header bg-dark text-success bg-gradient border-bottom border-2 border-success">Informasi Akun</div>
+                        <div class="card-body bg-dark text-light">
                             {{-- Alert --}}
                             @if (session()->has('success'))
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -98,7 +98,7 @@
                                     <input class="form-control" name="email" type="email" placeholder="name@example.com" value="{{ $user->email }}" required/>
                                 </div>
                                 <!-- Save changes button-->
-                                <button class="btn btn-primary" type="submit">Perbarui Profil</button>
+                                <button class="btn btn-outline-success" type="submit">Perbarui Profil</button>
                             </form>
                         </div>
                     </div>
