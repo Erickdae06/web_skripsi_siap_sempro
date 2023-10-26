@@ -16,46 +16,56 @@ class UserController extends Controller
 {
     public function index()
     {
-        if (request()->ajax()) {
-            $query = User::latest()->get();
+        $currentUser = auth()->user();
+        if ($currentUser && $currentUser->roles === 'admin') {
+            if (request()->ajax()) {
+                $query = User::latest()->get();
 
-            return Datatables::of($query)
-                ->addColumn('action', function ($item) {
-                    return '
-                        <a class="btn btn-primary btn-xs" href="' . route('user.edit', $item->id) . '">
-                            <i class="fas fa-edit"></i> &nbsp; Ubah
-                        </a>
-                        <form action="' . route('user.destroy', $item->id) . '" method="POST" onsubmit="return confirm(' . "'Anda akan menghapus item ini secara permanen dari situs anda?'" . ')">
-                            ' . method_field('delete') . csrf_field() . '
-                            <button class="btn btn-danger btn-xs">
-                                <i class="far fa-trash-alt"></i> &nbsp; Hapus
-                            </button>
-                        </form>
-                    ';
-                })
-                ->editColumn('name', function ($item) {
-                    return $item->profile ?
-                        '<div class="d-flex align-items-center">
-                                    <div class="avatar me-2"><img class="avatar-img img-fluid" src="' . Storage::url($item->profile) . '" /></div>' .
-                        $item->name . '
-                                </div>'
-                        :
-                        '<div class="d-flex align-items-center">
-                                    <div class="avatar me-2"><img class="avatar-img img-fluid" src="https://ui-avatars.com/api/?name=' . $item->name . '" /></div>' .
-                        $item->name . '
-                                </div>';
-                })
-                ->addIndexColumn()
-                ->removeColumn('id')
-                ->rawColumns(['action', 'name'])
-                ->make();
+                return Datatables::of($query)
+                    ->addColumn('action', function ($item) {
+                        return '
+                            <a class="btn btn-primary btn-xs" href="' . route('user.edit', $item->id) . '">
+                                <i class="fas fa-edit"></i> &nbsp; Ubah
+                            </a>
+                            <form action="' . route('user.destroy', $item->id) . '" method="POST" onsubmit="return confirm(' . "'Anda akan menghapus item ini secara permanen dari situs anda?'" . ')">
+                                ' . method_field('delete') . csrf_field() . '
+                                <button class="btn btn-danger btn-xs">
+                                    <i class="far fa-trash-alt"></i> &nbsp; Hapus
+                                </button>
+                            </form>
+                        ';
+                    })
+                    ->editColumn('name', function ($item) {
+                        return $item->profile ?
+                            '<div class="d-flex align-items-center">
+                                        <div class="avatar me-2"><img class="avatar-img img-fluid" src="' . Storage::url($item->profile) . '" /></div>' .
+                            $item->name . '
+                                    </div>'
+                            :
+                            '<div class="d-flex align-items-center">
+                                        <div class="avatar me-2"><img class="avatar-img img-fluid" src="https://ui-avatars.com/api/?name=' . $item->name . '" /></div>' .
+                            $item->name . '
+                                    </div>';
+                    })
+                    ->addIndexColumn()
+                    ->removeColumn('id')
+                    ->rawColumns(['action', 'name'])
+                    ->make();
+            }
+
+            return view('pages.admin.user.index');
         }
-        return view('pages.admin.user.index');
+        return redirect()->route('admin-dashboard')->with('error', 'Anda tidak memiliki izin untuk mengakses halaman Data User');
+
     }
 
     public function create()
     {
-        return view('pages.admin.user.create');
+        $currentUser = auth()->user();
+        if ($currentUser && $currentUser->roles === 'admin') {
+            return view('pages.admin.user.create');
+        }
+        return redirect()->route('user.index')->with('error', 'Anda tidak memiliki izin untuk mengakses halaman ini.');
     }
 
     public function store(Request $request)

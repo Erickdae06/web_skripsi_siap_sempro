@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Department;
+use App\Models\Role;
 use App\Models\Sender;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -18,9 +19,10 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         User::create([
-            'name' => 'Sinklaus Patrezki Dae',
+            $admin = 'name' => 'Sinklaus Patrezki Dae',
             'email' => 'tgaimgod@gmail.com',
-            'password' => bcrypt('Erickdae2001')
+            'password' => bcrypt('Erickdae2001'),
+            'roles' => 'admin'
         ]);
 
         Sender::create([
